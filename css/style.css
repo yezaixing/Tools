@@ -1,0 +1,428 @@
+/* ==================== Reset & Base ==================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #f5f5f7;
+  color: #333;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  text-align: center;
+  padding: 40px 20px 20px;
+}
+
+header h1 {
+  font-size: 2rem;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+}
+
+header p {
+  color: #666;
+  font-size: 1rem;
+}
+
+/* ==================== Navigation ==================== */
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 20px 20px;
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  padding: 10px 24px;
+  border: none;
+  background: #e5e5e7;
+  border-radius: 20px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #555;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tab-btn:hover {
+  background: #d5d5d7;
+}
+
+.tab-btn.active {
+  background: #0071e3;
+  color: #fff;
+}
+
+/* ==================== Main Content ==================== */
+main {
+  flex: 1;
+  padding: 0 20px 40px;
+  max-width: 700px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+/* ==================== Tool Container ==================== */
+.tool-container {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* ==================== Upload Area ==================== */
+.upload-area {
+  position: relative;
+  border: 2px dashed #d5d5d7;
+  border-radius: 12px;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+  overflow: hidden;
+}
+
+.upload-area:hover,
+.upload-area.dragover {
+  border-color: #0071e3;
+  background: rgba(0, 113, 227, 0.03);
+}
+
+.upload-area input[type="file"] {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.upload-placeholder {
+  text-align: center;
+  color: #888;
+  pointer-events: none;
+}
+
+.upload-placeholder svg {
+  margin-bottom: 12px;
+  color: #ccc;
+}
+
+.upload-placeholder p {
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+.upload-placeholder span {
+  font-size: 0.85rem;
+  color: #aaa;
+}
+
+.preview-area {
+  position: relative;
+  padding: 16px;
+}
+
+.preview-area img {
+  max-width: 100%;
+  max-height: 300px;
+  display: block;
+  margin: 0 auto;
+  border-radius: 8px;
+}
+
+.clear-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clear-btn:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/* ==================== Controls ==================== */
+.controls {
+  margin-top: 20px;
+}
+
+.control-group {
+  margin-bottom: 16px;
+}
+
+.control-group > label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.control-group > label[for] {
+  cursor: pointer;
+}
+
+.format-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.format-btn {
+  flex: 1;
+  padding: 10px 16px;
+  border: 2px solid #e5e5e7;
+  background: #fff;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #555;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.format-btn:hover {
+  border-color: #0071e3;
+  color: #0071e3;
+}
+
+.format-btn.active {
+  border-color: #0071e3;
+  background: #0071e3;
+  color: #fff;
+}
+
+/* ==================== Range Slider ==================== */
+input[type="range"] {
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: #e5e5e7;
+  appearance: none;
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #0071e3;
+  cursor: pointer;
+}
+
+/* ==================== Preset Buttons ==================== */
+.preset-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.preset-btn {
+  padding: 8px 14px;
+  border: 1px solid #e5e5e7;
+  background: #fff;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: #555;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.preset-btn:hover {
+  border-color: #0071e3;
+  color: #0071e3;
+}
+
+.preset-btn.active {
+  border-color: #0071e3;
+  background: #e5f0ff;
+  color: #0071e3;
+}
+
+/* ==================== Size Inputs ==================== */
+.size-inputs {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.size-inputs input {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #e5e5e7;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.size-inputs input:focus {
+  border-color: #0071e3;
+}
+
+.size-inputs span {
+  color: #888;
+  font-weight: 500;
+}
+
+/* ==================== Checkbox ==================== */
+input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #0071e3;
+  cursor: pointer;
+}
+
+/* ==================== Action Button ==================== */
+.action-btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  background: #0071e3;
+  color: #fff;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 8px;
+}
+
+.action-btn:hover {
+  background: #0077ed;
+}
+
+.action-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* ==================== Result Area ==================== */
+.result-area {
+  margin-top: 20px;
+  padding: 16px;
+  background: #f5f5f7;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.result-info {
+  margin-bottom: 12px;
+  font-size: 0.9rem;
+  color: #666;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.result-info span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.download-btn {
+  display: inline-block;
+  padding: 12px 32px;
+  background: #34c759;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.download-btn:hover {
+  background: #2db14e;
+}
+
+/* ==================== Crop Overlay ==================== */
+.crop-overlay {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.crop-overlay.hidden {
+  display: none;
+}
+
+#crop-box {
+  position: absolute;
+  border: 2px dashed #fff;
+  background: transparent;
+}
+
+/* ==================== Footer ==================== */
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #888;
+  font-size: 0.85rem;
+}
+
+/* ==================== Utility ==================== */
+.hidden {
+  display: none !important;
+}
+
+/* ==================== Responsive ==================== */
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 1.6rem;
+  }
+
+  .tool-container {
+    padding: 16px;
+  }
+
+  nav {
+    gap: 6px;
+  }
+
+  .tab-btn {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+  }
+
+  .format-buttons {
+    flex-wrap: wrap;
+  }
+
+  .format-btn {
+    font-size: 0.85rem;
+    padding: 8px 12px;
+  }
+}

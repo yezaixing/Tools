@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>图片工具箱 - 在线免费图片处理</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <h1>图片工具箱</h1>
+    <p>免费在线图片处理工具，无需上传，即时处理</p>
+  </header>
+
+  <nav>
+    <button class="tab-btn active" data-tab="convert">格式转换</button>
+    <button class="tab-btn" data-tab="compress">图片压缩</button>
+    <button class="tab-btn" data-tab="resize">裁剪/缩放</button>
+  </nav>
+
+  <main>
+    <!-- 格式转换 -->
+    <section id="convert" class="tab-panel active">
+      <div class="tool-container">
+        <div class="upload-area" id="convert-upload">
+          <input type="file" id="convert-input" accept="image/*" hidden>
+          <div class="upload-placeholder">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <circle cx="8.5" cy="8.5" r="1.5"/>
+              <path d="M21 15l-5-5L5 21"/>
+            </svg>
+            <p>点击或拖拽图片到这里</p>
+            <span>支持 JPG, PNG, WebP, GIF</span>
+          </div>
+          <div class="preview-area hidden">
+            <img id="convert-preview" alt="预览">
+            <button class="clear-btn" id="convert-clear">×</button>
+          </div>
+        </div>
+
+        <div class="controls">
+          <div class="control-group">
+            <label>目标格式</label>
+            <div class="format-buttons">
+              <button class="format-btn active" data-format="image/jpeg">JPG</button>
+              <button class="format-btn" data-format="image/png">PNG</button>
+              <button class="format-btn" data-format="image/webp">WebP</button>
+            </div>
+          </div>
+          <button class="action-btn" id="convert-btn">转换格式</button>
+        </div>
+
+        <div class="result-area hidden" id="convert-result">
+          <div class="result-info">
+            <span id="convert-size"></span>
+          </div>
+          <a id="convert-download" class="download-btn" download>下载图片</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 图片压缩 -->
+    <section id="compress" class="tab-panel">
+      <div class="tool-container">
+        <div class="upload-area" id="compress-upload">
+          <input type="file" id="compress-input" accept="image/*" hidden>
+          <div class="upload-placeholder">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <circle cx="8.5" cy="8.5" r="1.5"/>
+              <path d="M21 15l-5-5L5 21"/>
+            </svg>
+            <p>点击或拖拽图片到这里</p>
+            <span>支持 JPG, PNG, WebP</span>
+          </div>
+          <div class="preview-area hidden">
+            <img id="compress-preview" alt="预览">
+            <button class="clear-btn" id="compress-clear">×</button>
+          </div>
+        </div>
+
+        <div class="controls">
+          <div class="control-group">
+            <label>压缩质量: <span id="quality-value">80</span>%</label>
+            <input type="range" id="quality-slider" min="10" max="100" value="80">
+          </div>
+          <button class="action-btn" id="compress-btn">压缩图片</button>
+        </div>
+
+        <div class="result-area hidden" id="compress-result">
+          <div class="result-info">
+            <span id="compress-size"></span>
+            <span id="compress-ratio"></span>
+          </div>
+          <a id="compress-download" class="download-btn" download>下载图片</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 裁剪/缩放 -->
+    <section id="resize" class="tab-panel">
+      <div class="tool-container">
+        <div class="upload-area" id="resize-upload">
+          <input type="file" id="resize-input" accept="image/*" hidden>
+          <div class="upload-placeholder">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <circle cx="8.5" cy="8.5" r="1.5"/>
+              <path d="M21 15l-5-5L5 21"/>
+            </svg>
+            <p>点击或拖拽图片到这里</p>
+            <span>支持 JPG, PNG, WebP, GIF</span>
+          </div>
+          <div class="preview-area hidden">
+            <img id="resize-preview" alt="预览">
+            <div id="crop-overlay" class="crop-overlay hidden">
+              <div id="crop-box"></div>
+            </div>
+            <button class="clear-btn" id="resize-clear">×</button>
+          </div>
+        </div>
+
+        <div class="controls">
+          <div class="control-group">
+            <label>常用尺寸</label>
+            <div class="preset-buttons">
+              <button class="preset-btn" data-width="1920" data-height="1080">1920×1080</button>
+              <button class="preset-btn" data-width="1080" data-height="1080">1080×1080</button>
+              <button class="preset-btn" data-width="800" data-height="600">800×600</button>
+              <button class="preset-btn" data-width="500" data-height="500">500×500</button>
+            </div>
+          </div>
+          <div class="control-group">
+            <label>自定义尺寸</label>
+            <div class="size-inputs">
+              <input type="number" id="resize-width" placeholder="宽度" min="1">
+              <span>×</span>
+              <input type="number" id="resize-height" placeholder="高度" min="1">
+            </div>
+          </div>
+          <div class="control-group">
+            <label>
+              <input type="checkbox" id="maintain-aspect" checked>
+              保持宽高比
+            </label>
+          </div>
+          <button class="action-btn" id="resize-btn">处理图片</button>
+        </div>
+
+        <div class="result-area hidden" id="resize-result">
+          <div class="result-info">
+            <span id="resize-size"></span>
+          </div>
+          <a id="resize-download" class="download-btn" download>下载图片</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>所有图片处理在本地完成，不会上传到服务器，保护隐私</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
