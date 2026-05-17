@@ -53,8 +53,18 @@ main { flex: 1; padding: 0 20px 40px; max-width: 900px; margin: 0 auto; width: 1
 /* ==================== Upload Area ==================== */
 .upload-area { position: relative; border: 2px dashed #d5d5d7; border-radius: 12px; min-height: 180px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: border-color 0.2s, background 0.2s; overflow: hidden; }
 .upload-area:hover, .upload-area.dragover { border-color: #0071e3; background: rgba(0,113,227,0.03); }
-.upload-area input[type="file"] { position: absolute; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
-.upload-placeholder { text-align: center; color: #888; pointer-events: none; }
+.upload-area input[type="file"].file-input-hidden {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.upload-placeholder { text-align: center; color: #888; }
 .upload-placeholder svg { margin-bottom: 12px; color: #ccc; }
 .upload-placeholder p { font-size: 1rem; margin-bottom: 4px; }
 .upload-placeholder span { font-size: 0.85rem; color: #aaa; }
