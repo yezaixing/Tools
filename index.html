@@ -20,19 +20,13 @@
     </div>
   </header>
 
-  <div class="ad-banner">
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-6859862230795017"
-         data-ad-slot="YOUR_AD_SLOT_ID"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-  </div>
-
   <nav>
     <button class="tab-btn active" data-tab="convert" data-i18n="tabConvert">格式转换</button>
     <button class="tab-btn" data-tab="compress" data-i18n="tabCompress">图片压缩</button>
     <button class="tab-btn" data-tab="resize" data-i18n="tabResize">裁剪/缩放</button>
+    <button class="tab-btn" data-tab="rotate" data-i18n="tabRotate">旋转/翻转</button>
+    <button class="tab-btn" data-tab="grayscale" data-i18n="tabGrayscale">灰度处理</button>
+    <button class="tab-btn" data-tab="adjust" data-i18n="tabAdjust">亮度/对比度</button>
   </nav>
 
   <main>
@@ -170,6 +164,137 @@
             <span id="resize-size"></span>
           </div>
           <a id="resize-download" class="download-btn" download data-i18n="downloadBtn">下载图片</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 旋转/翻转 -->
+    <section id="rotate" class="tab-panel">
+      <div class="tool-container">
+        <div class="upload-area" id="rotate-upload">
+          <input type="file" id="rotate-input" accept="image/*" hidden>
+          <div class="upload-placeholder">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <circle cx="8.5" cy="8.5" r="1.5"/>
+              <path d="M21 15l-5-5L5 21"/>
+            </svg>
+            <p data-i18n="dropHint">点击或拖拽图片到这里</p>
+            <span data-i18n="supportedFormats">支持 JPG, PNG, WebP, GIF</span>
+          </div>
+          <div class="preview-area hidden">
+            <img id="rotate-preview" alt="Preview">
+            <button class="clear-btn" id="rotate-clear">×</button>
+          </div>
+        </div>
+
+        <div class="controls">
+          <div class="control-group">
+            <label data-i18n="rotateAngle">旋转角度</label>
+            <div class="preset-buttons">
+              <button class="rotate-preset-btn" data-deg="90">90°</button>
+              <button class="rotate-preset-btn" data-deg="180">180°</button>
+              <button class="rotate-preset-btn" data-deg="270">270°</button>
+              <button class="rotate-preset-btn" data-deg="0">0°</button>
+            </div>
+          </div>
+          <div class="control-group">
+            <label><span data-i18n="customRotate">自定义角度</span>: <span id="rotate-value">0</span>°</label>
+            <input type="range" id="rotate-slider" min="0" max="360" value="0">
+          </div>
+          <div class="control-group">
+            <label data-i18n="flipDirection">翻转方向</label>
+            <div class="flip-buttons">
+              <button class="flip-btn" id="flip-horizontal" data-i18n="flipHorizontal">水平翻转</button>
+              <button class="flip-btn" id="flip-vertical" data-i18n="flipVertical">垂直翻转</button>
+            </div>
+          </div>
+          <button class="action-btn" id="rotate-btn" data-i18n="rotateBtn">应用旋转</button>
+        </div>
+
+        <div class="result-area hidden" id="rotate-result">
+          <div class="result-info">
+            <span id="rotate-size"></span>
+          </div>
+          <a id="rotate-download" class="download-btn" download data-i18n="downloadBtn">下载图片</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 灰度处理 -->
+    <section id="grayscale" class="tab-panel">
+      <div class="tool-container">
+        <div class="upload-area" id="grayscale-upload">
+          <input type="file" id="grayscale-input" accept="image/*" hidden>
+          <div class="upload-placeholder">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <circle cx="8.5" cy="8.5" r="1.5"/>
+              <path d="M21 15l-5-5L5 21"/>
+            </svg>
+            <p data-i18n="dropHint">点击或拖拽图片到这里</p>
+            <span data-i18n="supportedFormats">支持 JPG, PNG, WebP, GIF</span>
+          </div>
+          <div class="preview-area hidden">
+            <img id="grayscale-preview" alt="Preview">
+            <button class="clear-btn" id="grayscale-clear">×</button>
+          </div>
+        </div>
+
+        <div class="controls">
+          <div class="control-group">
+            <label><span data-i18n="grayscaleLevel">灰度强度</span>: <span id="grayscale-value">100</span>%</label>
+            <input type="range" id="grayscale-slider" min="0" max="100" value="100">
+          </div>
+          <button class="action-btn" id="grayscale-btn" data-i18n="grayscaleBtn">应用灰度</button>
+        </div>
+
+        <div class="result-area hidden" id="grayscale-result">
+          <div class="result-info">
+            <span id="grayscale-size"></span>
+          </div>
+          <a id="grayscale-download" class="download-btn" download data-i18n="downloadBtn">下载图片</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 亮度/对比度 -->
+    <section id="adjust" class="tab-panel">
+      <div class="tool-container">
+        <div class="upload-area" id="adjust-upload">
+          <input type="file" id="adjust-input" accept="image/*" hidden>
+          <div class="upload-placeholder">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2"/>
+              <circle cx="8.5" cy="8.5" r="1.5"/>
+              <path d="M21 15l-5-5L5 21"/>
+            </svg>
+            <p data-i18n="dropHint">点击或拖拽图片到这里</p>
+            <span data-i18n="supportedFormats">支持 JPG, PNG, WebP, GIF</span>
+          </div>
+          <div class="preview-area hidden">
+            <img id="adjust-preview" alt="Preview">
+            <button class="clear-btn" id="adjust-clear">×</button>
+          </div>
+        </div>
+
+        <div class="controls">
+          <div class="control-group">
+            <label><span data-i18n="brightness">亮度</span>: <span id="brightness-value">0</span></label>
+            <input type="range" id="brightness-slider" min="-100" max="100" value="0">
+          </div>
+          <div class="control-group">
+            <label><span data-i18n="contrast">对比度</span>: <span id="contrast-value">0</span></label>
+            <input type="range" id="contrast-slider" min="-100" max="100" value="0">
+          </div>
+          <button class="action-btn" id="adjust-btn" data-i18n="adjustBtn">应用调整</button>
+        </div>
+
+        <div class="result-area hidden" id="adjust-result">
+          <div class="result-info">
+            <span id="adjust-size"></span>
+          </div>
+          <a id="adjust-download" class="download-btn" download data-i18n="downloadBtn">下载图片</a>
         </div>
       </div>
     </section>

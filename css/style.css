@@ -289,7 +289,8 @@ input[type="range"]::-webkit-slider-thumb {
   gap: 8px;
 }
 
-.preset-btn {
+.preset-btn,
+.rotate-preset-btn {
   padding: 8px 14px;
   border: 1px solid #e5e5e7;
   background: #fff;
@@ -300,12 +301,43 @@ input[type="range"]::-webkit-slider-thumb {
   transition: all 0.2s;
 }
 
-.preset-btn:hover {
+.preset-btn:hover,
+.rotate-preset-btn:hover {
   border-color: #0071e3;
   color: #0071e3;
 }
 
-.preset-btn.active {
+.preset-btn.active,
+.rotate-preset-btn.active {
+  border-color: #0071e3;
+  background: #e5f0ff;
+  color: #0071e3;
+}
+
+/* ==================== Flip Buttons ==================== */
+.flip-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.flip-btn {
+  flex: 1;
+  padding: 8px 14px;
+  border: 1px solid #e5e5e7;
+  background: #fff;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: #555;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.flip-btn:hover {
+  border-color: #0071e3;
+  color: #0071e3;
+}
+
+.flip-btn.active {
   border-color: #0071e3;
   background: #e5f0ff;
   color: #0071e3;
