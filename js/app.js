@@ -1,3 +1,118 @@
+// ==================== Internationalization ====================
+const translations = {
+  zh: {
+    title: '图片工具箱 - 在线免费图片处理',
+    h1: '图片工具箱',
+    subtitle: '免费在线图片处理工具，无需上传，即时处理',
+    tabConvert: '格式转换',
+    tabCompress: '图片压缩',
+    tabResize: '裁剪/缩放',
+    dropHint: '点击或拖拽图片到这里',
+    supportedFormats: '支持 JPG, PNG, WebP, GIF',
+    supportedFormatsCompress: '支持 JPG, PNG, WebP',
+    targetFormat: '目标格式',
+    convertBtn: '转换格式',
+    compressQuality: '压缩质量',
+    compressBtn: '压缩图片',
+    commonSizes: '常用尺寸',
+    customSize: '自定义尺寸',
+    maintainAspect: '保持宽高比',
+    resizeBtn: '处理图片',
+    downloadBtn: '下载图片',
+    privacyNotice: '所有图片处理在本地完成，不会上传到服务器，保护隐私',
+    originalFile: '原文件',
+    convertedFile: '新文件',
+    compressedFile: '压缩后',
+    reducedBy: '减小',
+    originalSize: '原尺寸',
+    newSize: '新尺寸',
+    placeholder: '宽度',
+    placeholderHeight: '高度'
+  },
+  en: {
+    title: 'Image Toolbox - Free Online Image Processing',
+    h1: 'Image Toolbox',
+    subtitle: 'Free online image processing tools. No upload required, instant results.',
+    tabConvert: 'Convert',
+    tabCompress: 'Compress',
+    tabResize: 'Resize',
+    dropHint: 'Click or drag image here',
+    supportedFormats: 'Supports JPG, PNG, WebP, GIF',
+    supportedFormatsCompress: 'Supports JPG, PNG, WebP',
+    targetFormat: 'Target Format',
+    convertBtn: 'Convert',
+    compressQuality: 'Quality',
+    compressBtn: 'Compress',
+    commonSizes: 'Common Sizes',
+    customSize: 'Custom Size',
+    maintainAspect: 'Maintain Aspect Ratio',
+    resizeBtn: 'Process',
+    downloadBtn: 'Download',
+    privacyNotice: 'All processing done locally. Images never uploaded to server.',
+    originalFile: 'Original',
+    convertedFile: 'Converted',
+    compressedFile: 'Compressed',
+    reducedBy: 'Reduced',
+    originalSize: 'Original',
+    newSize: 'New',
+    placeholder: 'Width',
+    placeholderHeight: 'Height'
+  }
+};
+
+// Detect language: China = Chinese, else = English
+function detectLanguage() {
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const chinaTimezones = [
+    'Asia/Shanghai', 'Asia/Hong_Kong', 'Asia/Macau', 'Asia/Taipei',
+    'Asia/Chongqing', 'Asia/Harbin', 'Asia/Urumqi', 'Asia/Kashgar'
+  ];
+  if (chinaTimezones.includes(timezone)) return 'zh';
+
+  // Fallback: check accept-language header via navigator
+  const lang = navigator.language || navigator.userLanguage;
+  if (lang.startsWith('zh')) return 'zh';
+
+  return 'en';
+}
+
+let currentLang = detectLanguage();
+
+function setLanguage(lang) {
+  currentLang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (translations[lang][key]) {
+      el.textContent = translations[lang][key];
+    }
+  });
+
+  // Update placeholders
+  document.getElementById('resize-width').placeholder = translations[lang].placeholder;
+  document.getElementById('resize-height').placeholder = translations[lang].placeholderHeight;
+
+  // Update lang buttons
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+
+  // Persist choice
+  localStorage.setItem('lang', lang);
+}
+
+// Language switcher buttons
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+});
+
+// Check stored preference
+const storedLang = localStorage.getItem('lang');
+if (storedLang && translations[storedLang]) {
+  setLanguage(storedLang);
+} else {
+  setLanguage(currentLang);
+}
+
 // ==================== Tab Navigation ====================
 const tabBtns = document.querySelectorAll('.tab-btn');
 const tabPanels = document.querySelectorAll('.tab-panel');
@@ -18,6 +133,10 @@ function formatFileSize(bytes) {
   return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
 }
 
+function t(key) {
+  return translations[currentLang][key] || key;
+}
+
 function createCanvas(img) {
   const canvas = document.createElement('canvas');
   canvas.width = img.naturalWidth;
@@ -35,13 +154,11 @@ function fileToBlob(canvas, mimeType, quality = 0.92) {
 
 // ==================== Upload Area Setup ====================
 function setupUploadArea(uploadArea, inputEl, previewEl, clearBtn, onFileSelect) {
-  // File input change
   inputEl.addEventListener('change', e => {
     const file = e.target.files[0];
     if (file) loadImage(file, previewEl, onFileSelect);
   });
 
-  // Drag and drop
   uploadArea.addEventListener('dragover', e => {
     e.preventDefault();
     uploadArea.classList.add('dragover');
@@ -60,7 +177,6 @@ function setupUploadArea(uploadArea, inputEl, previewEl, clearBtn, onFileSelect)
     }
   });
 
-  // Clear button
   clearBtn.addEventListener('click', e => {
     e.stopPropagation();
     clearImage(uploadArea, inputEl, previewEl, clearBtn);
@@ -114,7 +230,6 @@ setupUploadArea(
   }
 );
 
-// Format buttons
 const formatBtns = document.querySelectorAll('.format-btn');
 let selectedFormat = 'image/jpeg';
 
@@ -126,7 +241,6 @@ formatBtns.forEach(btn => {
   });
 });
 
-// Convert button
 document.getElementById('convert-btn').addEventListener('click', async () => {
   if (!convertCurrentImg) return;
 
@@ -138,7 +252,7 @@ document.getElementById('convert-btn').addEventListener('click', async () => {
   const sizeSpan = document.getElementById('convert-size');
   const downloadBtn = document.getElementById('convert-download');
 
-  sizeSpan.textContent = `原文件: ${formatFileSize(convertCurrentFile.size)} → 新文件: ${formatFileSize(blob.size)}`;
+  sizeSpan.textContent = `${t('originalFile')}: ${formatFileSize(convertCurrentFile.size)} → ${t('convertedFile')}: ${formatFileSize(blob.size)}`;
   downloadBtn.href = url;
   downloadBtn.download = `converted.${selectedFormat.split('/')[1]}`;
   resultArea.classList.remove('hidden');
@@ -159,7 +273,6 @@ setupUploadArea(
   }
 );
 
-// Quality slider
 const qualitySlider = document.getElementById('quality-slider');
 const qualityValue = document.getElementById('quality-value');
 
@@ -167,7 +280,6 @@ qualitySlider.addEventListener('input', () => {
   qualityValue.textContent = qualitySlider.value;
 });
 
-// Compress button
 document.getElementById('compress-btn').addEventListener('click', async () => {
   if (!compressCurrentImg) return;
 
@@ -182,8 +294,8 @@ document.getElementById('compress-btn').addEventListener('click', async () => {
   const downloadBtn = document.getElementById('compress-download');
 
   const ratio = ((1 - blob.size / compressCurrentFile.size) * 100).toFixed(1);
-  sizeSpan.textContent = `原文件: ${formatFileSize(compressCurrentFile.size)}`;
-  ratioSpan.textContent = `压缩后: ${formatFileSize(blob.size)} (减小 ${ratio}%)`;
+  sizeSpan.textContent = `${t('originalFile')}: ${formatFileSize(compressCurrentFile.size)}`;
+  ratioSpan.textContent = `${t('compressedFile')}: ${formatFileSize(blob.size)} (${t('reducedBy')} ${ratio}%)`;
   downloadBtn.href = url;
   downloadBtn.download = 'compressed.jpg';
   resultArea.classList.remove('hidden');
@@ -204,7 +316,6 @@ setupUploadArea(
   }
 );
 
-// Preset buttons
 const presetBtns = document.querySelectorAll('.preset-btn');
 const widthInput = document.getElementById('resize-width');
 const heightInput = document.getElementById('resize-height');
@@ -219,7 +330,6 @@ presetBtns.forEach(btn => {
   });
 });
 
-// Aspect ratio lock
 let aspectRatio = 1;
 
 widthInput.addEventListener('input', () => {
@@ -236,7 +346,6 @@ heightInput.addEventListener('input', () => {
   }
 });
 
-// Resize button
 document.getElementById('resize-btn').addEventListener('click', async () => {
   if (!resizeCurrentImg) return;
 
@@ -256,7 +365,7 @@ document.getElementById('resize-btn').addEventListener('click', async () => {
   const sizeSpan = document.getElementById('resize-size');
   const downloadBtn = document.getElementById('resize-download');
 
-  sizeSpan.textContent = `原尺寸: ${resizeCurrentImg.naturalWidth}×${resizeCurrentImg.naturalHeight} → 新尺寸: ${targetWidth}×${targetHeight}`;
+  sizeSpan.textContent = `${t('originalSize')}: ${resizeCurrentImg.naturalWidth}×${resizeCurrentImg.naturalHeight} → ${t('newSize')}: ${targetWidth}×${targetHeight}`;
   downloadBtn.href = url;
   downloadBtn.download = 'resized.jpg';
   resultArea.classList.remove('hidden');

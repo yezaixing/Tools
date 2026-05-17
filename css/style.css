@@ -16,8 +16,21 @@ body {
 }
 
 header {
-  text-align: center;
-  padding: 40px 20px 20px;
+  padding: 30px 20px 20px;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 700px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.header-text {
+  text-align: left;
 }
 
 header h1 {
@@ -29,6 +42,36 @@ header h1 {
 header p {
   color: #666;
   font-size: 1rem;
+}
+
+.lang-switch {
+  display: flex;
+  gap: 4px;
+  background: #e5e5e7;
+  padding: 4px;
+  border-radius: 20px;
+}
+
+.lang-btn {
+  padding: 6px 14px;
+  border: none;
+  background: transparent;
+  border-radius: 16px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.lang-btn:hover {
+  color: #333;
+}
+
+.lang-btn.active {
+  background: #fff;
+  color: #333;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
 /* ==================== Navigation ==================== */
