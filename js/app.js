@@ -113,6 +113,9 @@ if (storedLang && translations[storedLang]) {
   setLanguage(currentLang);
 }
 
+// Bootstrap AdSense ads
+(adsbygoogle = window.adsbygoogle || []).push({});
+
 // ==================== Tab Navigation ====================
 const tabBtns = document.querySelectorAll('.tab-btn');
 const tabPanels = document.querySelectorAll('.tab-panel');
